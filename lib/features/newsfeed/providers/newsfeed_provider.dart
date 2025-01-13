@@ -67,6 +67,7 @@ class NewsfeedNotifier extends StateNotifier<NewsfeedStateModel> {
 
     Future<void> getComments({required BuildContext context, required String feedId, bool isUpdate = true}) async {
     if(isUpdate) state = state.copyWith(commentList: null, isLoading: false);
+    state = state.copyWith(isParentChildDataLoad: true);
 
     final response = await newsfeedRepo.getComments(feedId: feedId);
     if (response.statusCode == 200) {
@@ -74,10 +75,10 @@ class NewsfeedNotifier extends StateNotifier<NewsfeedStateModel> {
       state = state.copyWith(commentList: List<CommentModel>.from(jsonDecode(response.body).map((x) => CommentModel.fromJson(x))), isLoading: false);
       log('Comments fetched: ${state.commentList?.length}', name: 'NewsfeedController'); 
       if(context.mounted) {
-        divideParentChildComments(state.commentList, context);
+        await divideParentChildComments(state.commentList, context);
       }
     } else {
-      state = state.copyWith(isLoading: false, commentList: []);
+      state = state.copyWith(isLoading: false, commentList: [], isParentChildDataLoad: false);
       if(context.mounted) {
         showCustomSnackbar(context: context, message: 'Failed to fetch comments', isError: true);
       }
@@ -85,9 +86,12 @@ class NewsfeedNotifier extends StateNotifier<NewsfeedStateModel> {
    
   }
 
-  void divideParentChildComments(List<CommentModel>? commentList, BuildContext context) async {
+  Future<void> divideParentChildComments(List<CommentModel>? commentList, BuildContext context) async {
     state = state.copyWith(parentChildComments: {});
-    if (commentList == null || commentList.isEmpty) return;
+    if (commentList == null || commentList.isEmpty) {
+      state = state.copyWith(isParentChildDataLoad: false);
+      return;
+    }
 
     for (var comment in commentList) {
       state = state.copyWith(parentChildComments: {
@@ -122,7 +126,7 @@ class NewsfeedNotifier extends StateNotifier<NewsfeedStateModel> {
 
     log('length Parent: ${state.parentChildComments?.length}', name: 'NewsfeedController'); 
 
-    state = state.copyWith(isLoading: false);
+    state = state.copyWith(isLoading: false, isParentChildDataLoad: false);
   }
 
   Future<bool> createComment({required BuildContext context, required String feedId, required String feedUserId, required String commentText, String? parentId}) async {

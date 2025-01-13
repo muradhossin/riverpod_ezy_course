@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:boilerplate/core/extensions/image_path.dart';
 import 'package:boilerplate/core/routes/routes.dart';
 import 'package:boilerplate/features/login/controllers/login_provider.dart';
@@ -48,7 +49,7 @@ class _NewsfeedScreenState extends ConsumerState<NewsfeedScreen> {
   }
 
   void _onScroll() {
-    if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
+    if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 1000) {
       final newsFeedNotifier = ref.read(newsFeedProvider.notifier);
       final newsFeedState = ref.read(newsFeedProvider);
       if (newsFeedState.newsFeedList != null && newsFeedState.newsFeedList!.isNotEmpty) {

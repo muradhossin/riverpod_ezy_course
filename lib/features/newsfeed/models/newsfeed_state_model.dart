@@ -15,6 +15,7 @@ class NewsfeedStateModel with _$NewsfeedStateModel {
     List<ReactionModel>? reactionList,
     Map<String, List<CommentModel>>? parentChildComments,
     @Default(false) bool isCommentLoading,
+    @Default(false) bool isParentChildDataLoad,
   }) = _NewsfeedStateModel;
 
   factory NewsfeedStateModel.fromJson(Map<String, dynamic> json) => _$NewsfeedStateModelFromJson(json);

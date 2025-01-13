@@ -30,7 +30,9 @@ class _CommentBottomSheetWidgetState extends ConsumerState<CommentBottomSheetWid
   @override
   void initState() {
     super.initState();
-    getComments();
+    Future(() {
+      getComments();
+    });
   }
 
   Future<void> getComments() async {
@@ -75,7 +77,7 @@ class _CommentBottomSheetWidgetState extends ConsumerState<CommentBottomSheetWid
 
                 Consumer(
                   builder: (context, watch, child) {
-                    if (newsFeedState.isLoading || newsFeedState.parentChildComments == null) {
+                    if (newsFeedState.isLoading || newsFeedState.parentChildComments == null || newsFeedState.isParentChildDataLoad) {
                       return Expanded(
                         child: Center(
                           child: CircularProgressIndicator(),

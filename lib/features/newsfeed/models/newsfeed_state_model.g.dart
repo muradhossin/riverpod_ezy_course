@@ -28,6 +28,7 @@ _$NewsfeedStateModelImpl _$$NewsfeedStateModelImplFromJson(
                 .toList()),
       ),
       isCommentLoading: json['isCommentLoading'] as bool? ?? false,
+      isParentChildDataLoad: json['isParentChildDataLoad'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$NewsfeedStateModelImplToJson(
@@ -39,4 +40,5 @@ Map<String, dynamic> _$$NewsfeedStateModelImplToJson(
       'reactionList': instance.reactionList,
       'parentChildComments': instance.parentChildComments,
       'isCommentLoading': instance.isCommentLoading,
+      'isParentChildDataLoad': instance.isParentChildDataLoad,
     };

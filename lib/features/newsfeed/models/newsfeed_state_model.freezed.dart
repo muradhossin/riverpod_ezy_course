@@ -27,6 +27,7 @@ mixin _$NewsfeedStateModel {
   Map<String, List<CommentModel>>? get parentChildComments =>
       throw _privateConstructorUsedError;
   bool get isCommentLoading => throw _privateConstructorUsedError;
+  bool get isParentChildDataLoad => throw _privateConstructorUsedError;
 
   /// Serializes this NewsfeedStateModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -50,7 +51,8 @@ abstract class $NewsfeedStateModelCopyWith<$Res> {
       List<CommentModel>? commentList,
       List<ReactionModel>? reactionList,
       Map<String, List<CommentModel>>? parentChildComments,
-      bool isCommentLoading});
+      bool isCommentLoading,
+      bool isParentChildDataLoad});
 }
 
 /// @nodoc
@@ -74,6 +76,7 @@ class _$NewsfeedStateModelCopyWithImpl<$Res, $Val extends NewsfeedStateModel>
     Object? reactionList = freezed,
     Object? parentChildComments = freezed,
     Object? isCommentLoading = null,
+    Object? isParentChildDataLoad = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -100,6 +103,10 @@ class _$NewsfeedStateModelCopyWithImpl<$Res, $Val extends NewsfeedStateModel>
           ? _value.isCommentLoading
           : isCommentLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isParentChildDataLoad: null == isParentChildDataLoad
+          ? _value.isParentChildDataLoad
+          : isParentChildDataLoad // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -118,7 +125,8 @@ abstract class _$$NewsfeedStateModelImplCopyWith<$Res>
       List<CommentModel>? commentList,
       List<ReactionModel>? reactionList,
       Map<String, List<CommentModel>>? parentChildComments,
-      bool isCommentLoading});
+      bool isCommentLoading,
+      bool isParentChildDataLoad});
 }
 
 /// @nodoc
@@ -140,6 +148,7 @@ class __$$NewsfeedStateModelImplCopyWithImpl<$Res>
     Object? reactionList = freezed,
     Object? parentChildComments = freezed,
     Object? isCommentLoading = null,
+    Object? isParentChildDataLoad = null,
   }) {
     return _then(_$NewsfeedStateModelImpl(
       isLoading: null == isLoading
@@ -166,6 +175,10 @@ class __$$NewsfeedStateModelImplCopyWithImpl<$Res>
           ? _value.isCommentLoading
           : isCommentLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isParentChildDataLoad: null == isParentChildDataLoad
+          ? _value.isParentChildDataLoad
+          : isParentChildDataLoad // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -181,7 +194,8 @@ class _$NewsfeedStateModelImpl
       final List<CommentModel>? commentList,
       final List<ReactionModel>? reactionList,
       final Map<String, List<CommentModel>>? parentChildComments,
-      this.isCommentLoading = false})
+      this.isCommentLoading = false,
+      this.isParentChildDataLoad = false})
       : _newsFeedList = newsFeedList,
         _commentList = commentList,
         _reactionList = reactionList,
@@ -237,10 +251,13 @@ class _$NewsfeedStateModelImpl
   @override
   @JsonKey()
   final bool isCommentLoading;
+  @override
+  @JsonKey()
+  final bool isParentChildDataLoad;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NewsfeedStateModel(isLoading: $isLoading, newsFeedList: $newsFeedList, commentList: $commentList, reactionList: $reactionList, parentChildComments: $parentChildComments, isCommentLoading: $isCommentLoading)';
+    return 'NewsfeedStateModel(isLoading: $isLoading, newsFeedList: $newsFeedList, commentList: $commentList, reactionList: $reactionList, parentChildComments: $parentChildComments, isCommentLoading: $isCommentLoading, isParentChildDataLoad: $isParentChildDataLoad)';
   }
 
   @override
@@ -253,7 +270,9 @@ class _$NewsfeedStateModelImpl
       ..add(DiagnosticsProperty('commentList', commentList))
       ..add(DiagnosticsProperty('reactionList', reactionList))
       ..add(DiagnosticsProperty('parentChildComments', parentChildComments))
-      ..add(DiagnosticsProperty('isCommentLoading', isCommentLoading));
+      ..add(DiagnosticsProperty('isCommentLoading', isCommentLoading))
+      ..add(
+          DiagnosticsProperty('isParentChildDataLoad', isParentChildDataLoad));
   }
 
   @override
@@ -272,7 +291,9 @@ class _$NewsfeedStateModelImpl
             const DeepCollectionEquality()
                 .equals(other._parentChildComments, _parentChildComments) &&
             (identical(other.isCommentLoading, isCommentLoading) ||
-                other.isCommentLoading == isCommentLoading));
+                other.isCommentLoading == isCommentLoading) &&
+            (identical(other.isParentChildDataLoad, isParentChildDataLoad) ||
+                other.isParentChildDataLoad == isParentChildDataLoad));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -284,7 +305,8 @@ class _$NewsfeedStateModelImpl
       const DeepCollectionEquality().hash(_commentList),
       const DeepCollectionEquality().hash(_reactionList),
       const DeepCollectionEquality().hash(_parentChildComments),
-      isCommentLoading);
+      isCommentLoading,
+      isParentChildDataLoad);
 
   /// Create a copy of NewsfeedStateModel
   /// with the given fields replaced by the non-null parameter values.
@@ -310,7 +332,8 @@ abstract class _NewsfeedStateModel implements NewsfeedStateModel {
       final List<CommentModel>? commentList,
       final List<ReactionModel>? reactionList,
       final Map<String, List<CommentModel>>? parentChildComments,
-      final bool isCommentLoading}) = _$NewsfeedStateModelImpl;
+      final bool isCommentLoading,
+      final bool isParentChildDataLoad}) = _$NewsfeedStateModelImpl;
 
   factory _NewsfeedStateModel.fromJson(Map<String, dynamic> json) =
       _$NewsfeedStateModelImpl.fromJson;
@@ -327,6 +350,8 @@ abstract class _NewsfeedStateModel implements NewsfeedStateModel {
   Map<String, List<CommentModel>>? get parentChildComments;
   @override
   bool get isCommentLoading;
+  @override
+  bool get isParentChildDataLoad;
 
   /// Create a copy of NewsfeedStateModel
   /// with the given fields replaced by the non-null parameter values.
